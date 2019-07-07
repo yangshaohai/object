@@ -3,8 +3,11 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.mapper.UserMapper">
-    <select id="getPerson" resultType="com.pojo.Person">
-        select * from zhuce;
+   <!-- <select id="getPersonName" resultType="java.lang.String">
+        select password from zhuce where name;
+    </select>-->
+    <select id="getPersonByName" resultType="com.pojo.Person">
+        select * from zhuce where name=#{name} limit 0,1
     </select>
     <insert id="insertPerson" parameterType="com.pojo.Person">
         insert into zhuce(name, password, emil, number) values(#{name},#{password},#{emil},#{number})
