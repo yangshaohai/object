@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -17,6 +18,8 @@ public class PersonServiceImpl implements PersonService {
     //实例化对象
     @Autowired
     UserMapper userMapper;
+    @Autowired
+    HttpSession httpSession;
 
     //重写查询的方法
     //返回一个map集合  ， 也可以使用json格式
@@ -39,6 +42,8 @@ public class PersonServiceImpl implements PersonService {
                //网页状态码和信息
                 map.put("code","200");
                 map.put("msg","登录成功");
+                //判断状态完状态码之后将用户信息存到seeion里
+                httpSession.setAttribute("byName",byName);
             }else {
                 map.put("code","0");
                 map.put("msg","密码错误");
@@ -81,5 +86,7 @@ public class PersonServiceImpl implements PersonService {
             }
         return map;
     }
+
+
 
 }

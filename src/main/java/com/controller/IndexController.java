@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.util.Map;
 
 /**
@@ -23,6 +24,9 @@ public class IndexController {
     //自动注入实体类的接口并实现实体类
     @Autowired
     Person person;
+    //获取session值
+    @Autowired
+    HttpSession httpSession;
     //需要链接需要跳转的页面路径
     @RequestMapping("/index")
     //
@@ -42,29 +46,28 @@ public class IndexController {
     }
 
 //这里是从登录注册页面跳转到博客页面,登录成功
-    @RequestMapping("/boke")
+    @RequestMapping("/index2")
     //HttpServletRequest request  请求的数据
     public String boke(Model model,HttpServletRequest request){
         //System.out.println(personService.login(request));
-        //返回的是一个map集合
-        Map<String, String> login = personService.login(request);
-        //判断状态码
-        if ("0".equals(login.get("code"))){
-            model.addAttribute("msg",login.get("msg"));
+        //判断seeion是否为空
+        if (httpSession.getAttribute("byName")==null){
             return "erro";
         }
-        return "boke";
+
+        return "index2";
     }
+
   @RequestMapping("/houtai")
    public String houtai(){
         return "houtai";
   }
-
-    @RequestMapping("/login")
-    public String login(){
-        System.out.println(123);
-        return "login";
-    }
+//
+//    @RequestMapping("/login")
+//    public String login(){
+//        System.out.println(123);
+//        return "login";
+//    }
 
 
 
