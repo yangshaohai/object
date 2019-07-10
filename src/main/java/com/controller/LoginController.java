@@ -45,5 +45,9 @@ public class LoginController {
     public String whisper(){
         return "whisper";
     }
+    @RequestMapping("/houtai")
+    public String houtai(){
+        return "houtai";
+    }
 
 }

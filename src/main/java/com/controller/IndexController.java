@@ -58,10 +58,7 @@ public class IndexController {
         return "index2";
     }
 
-  @RequestMapping("/houtai")
-   public String houtai(){
-        return "houtai";
-  }
+
 //
 //    @RequestMapping("/login")
 //    public String login(){
